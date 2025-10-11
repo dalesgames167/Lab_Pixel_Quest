@@ -11,7 +11,10 @@ public class GeoController : MonoBehaviour
     string variable1 = "Hello";
     public float speed = 5;
     private Rigidbody2D rb;
-    public string nextlevel = "Scnee_2";
+    public string nextlevel = "Code for ";
+
+    private SpriteRenderer spriteRenderer;
+
 
     // Start is called before the first frame update
     private void Start()
@@ -19,6 +22,7 @@ public class GeoController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         string variable2 = "World";
         Debug.Log(variable1 + variable2);
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame 
@@ -28,11 +32,11 @@ public class GeoController : MonoBehaviour
         switch (other.tag)
         {
             case "Death":
-        {
-            string thisLevel = SceneManager.GetActiveScene().name;
-            SceneManager.LoadScene(thisLevel);
-                    break;
-        }
+            {
+                string thisLevel = SceneManager.GetActiveScene().name;
+                SceneManager.LoadScene(thisLevel);
+                break;
+            }
 
 
 
@@ -45,20 +49,30 @@ public class GeoController : MonoBehaviour
                 }
            
           
-                        }
+        }
     }
 
-   
-
-    
-      
-    
 
     // Update is called once per frame
     void Update()
-
     {
+        if (Input.GetKeyDown(KeyCode.Alpha1)) {
+            spriteRenderer.color = Color.green;
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Alpha2)) {
+            spriteRenderer.color = Color.gray;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3)) {
+            spriteRenderer.color = Color.black;
+        }
+
+
+
         /*
+         * 
         if (Input.GetKeyDown(KeyCode.W))
         {
             transform.position += new Vector3(0, 1, 0);
@@ -93,10 +107,10 @@ public class GeoController : MonoBehaviour
         */
         float xInput = Input.GetAxis("Horizontal");
 
-        Debug.Log(xInput);
+        //Debug.Log(xInput);
         rb.velocity = new Vector2(xInput * speed, rb.velocity.y);
 
 
-        
+    
     }
 }
