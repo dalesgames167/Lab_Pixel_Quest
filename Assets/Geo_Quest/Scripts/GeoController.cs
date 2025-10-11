@@ -3,24 +3,60 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
+using UnityEngine.SceneManagement;
+
 
 public class GeoController : MonoBehaviour
 {
     string variable1 = "Hello";
-    string variable2 = "World";
-    int variable3 = 3;
+    public float speed = 5;
     private Rigidbody2D rb;
-    public float speed = 7;
+    public string nextlevel = "Scnee_2";
+
     // Start is called before the first frame update
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
+        string variable2 = "World";
+        Debug.Log(variable1 + variable2);
     }
+
+    // Update is called once per frame 
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        switch (other.tag)
+        {
+            case "Death":
+        {
+            string thisLevel = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(thisLevel);
+                    break;
+        }
+
+
+
+
+
+            case "Finish":
+                {
+                    SceneManager.LoadScene(nextlevel);
+                    break;
+                }
+           
+          
+                        }
+    }
+
+   
+
+    
+      
+    
 
     // Update is called once per frame
     void Update()
+
     {
         /*
         if (Input.GetKeyDown(KeyCode.W))
