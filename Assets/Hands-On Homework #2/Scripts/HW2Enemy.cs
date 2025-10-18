@@ -61,7 +61,7 @@ public class HW2Enemy : MonoBehaviour
             _hw2GameController.UpdateScore();
             //Destorys the bullet
             Destroy(collision.gameObject);
-            //Destorys the enemy 
+            //Destroys the enemy 
             Destroy(gameObject);
         }
         // If the enemy touches a bound it gets destored 
