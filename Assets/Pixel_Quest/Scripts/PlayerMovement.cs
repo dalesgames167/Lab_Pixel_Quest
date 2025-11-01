@@ -4,19 +4,28 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Rigidbody2D _rigidbody2D;
-    public int speed = 4;
+    private int varOne = 3;
+    public float speed = 5; 
+    private Rigidbody2D rb;
+    public SpriteRenderer sr;
+   
+
     // Start is called before the first frame update
     void Start()
     {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
+        sr = transform.GetComponentInChildren<SpriteRenderer>(); 
+        rb = GetComponent<Rigidbody2D>();
+
     }
 
     // Update is called once per frame
     void Update ()
     {
-        float horizotal = Input.GetAxis("Horizontal");
+        Debug.Log(varOne++); 
+        float xInput = Input.GetAxis("Horizontal");
+        rb.velocity = new Vector2(xInput * speed, rb.velocity.y);
+        Debug.Log(xInput); 
 
-        _rigidbody2D.velocity = new Vector2(horizotal * speed, _rigidbody2D.velocity.y);
+       // _rigidbody2D.velocity = new Vector2(horizotal * speed, _rigidbody2D.velocity.y);
     }
 }
