@@ -42,13 +42,12 @@ public class PlayerJump : MonoBehaviour
         _groundCheck = Physics2D.OverlapCapsule(feetCollider.position, new Vector2(CapsuleHeight, CapsuleRadius), CapsuleDirection2D.Horizontal, 0, groundMask);
 
 
-        if (Input.GetKeyDown(KeyCode.Space) && _groundCheck)
+        if (Input.GetKeyDown(KeyCode.Space) && (_groundCheck || watercheck))
         {
-            _groundCheck = Physics2D.OverlapCapsule(feetCollider.position, new Vector2(CapsuleHeight, CapsuleRadius), CapsuleDirection2D.Horizontal, 0, groundMask);
-            {
+   
                 _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpForce);
 
-            }
+         
         }
     }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.U2D.Sprites;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,29 +8,65 @@ using UnityEngine.SceneManagement;
 public class PlayerStats : MonoBehaviour
 {
     public string nextLevel = "Scene_2";
+    public int CoinCounter = 0;
+    private int _maxHealth = 3;
+    private int _health = 0;
+    public Transform respawnPosition; 
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("Hit");
+
+
         switch (other.tag)
         {
             case "Death":
                 {
-                    string thisLevel = SceneManager.GetActiveScene().name;
-                    SceneManager.LoadScene(thisLevel);
-                    break;
+                    _health--;
+                    if (_health <= 0)
+                    {
+                        string thisLevel = SceneManager.GetActiveScene().name;
+                        SceneManager.LoadScene(thisLevel);
+                        Debug.Log("Death");
+                    }
+                    else
+                    {
+                        transform.position = respawnPosition.position;
+                    }
                 }
 
+                break;
 
 
+
+            case "Health":
+
+                {
+                    if (_health < _maxHealth)
+                    Destroy(other.gameObject);
+                    _health++;
+                }
+                break;
+
+          
+
+            case "Coin":
+               {
+                    CoinCounter++;
+                    Destroy(other.gameObject);
+                    break;
+
+               }
 
 
             case "Finish":
-                {
+               {
                     SceneManager.LoadScene(nextLevel);
                     break;
-                }
+               }
 
 
+                
         }
     }
 }
